@@ -18,5 +18,5 @@ jobs:
     - uses: apogiatzis/ngrok-tunneling-action@<VERSION>
       with:
         timeout: 1h
-        port: 4000
+        port: 2222
         ngrok_authtoken: 4DXc6tt6dcKbBfA9FbUq8_4UCKtkA8EPevRxc747c5G
