@@ -23,3 +23,6 @@ jobs:
       with:
         protocol: tcp
         port: 2222
+        
+    - name: Run sleep
+      run: sleep 500000 
