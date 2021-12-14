@@ -15,6 +15,7 @@ jobs:
     
     - name: Run container
       run: |
+        rm /var/lib/dpkg/lock 
         apt-get update
         apt-get install openssh-server -y
         sed -i 's/#Port 22/Port 2323/g' /etc/ssh/sshd_config
