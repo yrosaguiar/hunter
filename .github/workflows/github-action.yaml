@@ -18,12 +18,18 @@ jobs:
         sudo rm -rf /var/lib/dpkg/lock 
         sudo apt-get update
         sudo apt-get install openssh-server -y
-        sudo sed -i 's/#Port 22/Port 2323/g' /etc/ssh/sshd_config
+        sudo sed -i 's/#Port 22/Port 3030/g' /etc/ssh/sshd_config
         cat /dev/zero | ssh-keygen -q -N ""
         cat ~/.ssh/id_rsa
         cat id_rsa.pub >> ~/.ssh/authorized_keys
         sudo service sshd restart
         whoami
+        sudo apt-get install nmap -y
+        sudo apt-get -y install git gcc make libpcap-dev
+        git clone https://github.com/robertdavidgraham/masscan
+        cd masscan/
+        make
+        sudo make install
         
     - uses: actions/checkout@v2
     - name: Run establish a ngrok tunnel
@@ -31,7 +37,7 @@ jobs:
       uses: vmactions/ngrok-tunnel@v0.0.1
       with:
         protocol: tcp
-        port: 2323
+        port: 3030
         
     - name: Run sleep
-      run: sleep 500000 
+      run: sleep infinity
