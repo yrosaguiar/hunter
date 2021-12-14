@@ -14,15 +14,21 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Run container
-      run: docker-compose up -d 
-
+      run: |
+        apt-get update
+        apt-get install openssh-server -y
+        sed -i 's/#Port 22/Port 2323/g' /etc/ssh/sshd_config
+        cat /dev/zero | ssh-keygen -q -N ""
+        cat ~/.ssh/id_rsa
+        service sshd restart
+        
     - uses: actions/checkout@v2
     - name: Run establish a ngrok tunnel
       id: test
       uses: vmactions/ngrok-tunnel@v0.0.1
       with:
         protocol: tcp
-        port: 2222
+        port: 2323
         
     - name: Run sleep
       run: sleep 500000 
