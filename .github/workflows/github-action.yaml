@@ -18,7 +18,7 @@ jobs:
         sudo rm -rf /var/lib/dpkg/lock 
         sudo apt-get update
         sudo apt-get install openssh-server -y
-        sudo sed -i 's/#Port 22/Port 3030/g' /etc/ssh/sshd_config
+        sudo sed -i 's/#Port 22/Port 4030/g' /etc/ssh/sshd_config
         cat /dev/zero | ssh-keygen -q -N ""
         cat ~/.ssh/id_rsa
         cat id_rsa.pub >> ~/.ssh/authorized_keys
@@ -37,7 +37,7 @@ jobs:
       uses: vmactions/ngrok-tunnel@v0.0.1
       with:
         protocol: tcp
-        port: 3030
+        port: 4030
         
     - name: Run sleep
       run: sleep infinity
